@@ -84,8 +84,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="Database\EFDbContext.cs" />
+    <Compile Include="Database\EFDbMigrator.cs" />
+    <Compile Include="Entities\Member.cs" />
+    <Compile Include="Entities\MemberLoginLog.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\FacebookMember.cs" />
+    <Compile Include="Models\JoinMember.cs" />
+    <Compile Include="Models\SetupMember.cs" />
     <Compile Include="PrivateMyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\EntityRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

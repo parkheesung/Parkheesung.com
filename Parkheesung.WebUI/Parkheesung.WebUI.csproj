@@ -156,19 +156,106 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\angularicons\angularicons.svg" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\css\bootflat.css" />
+    <Content Include="Content\css\bootflat.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\HTML\newPasswordMailForm.html" />
+    <Content Include="Content\img\check_flat\default.png" />
+    <Content Include="Content\img\close-button.png" />
+    <Content Include="Content\img\close_btn.png" />
+    <Content Include="Content\img\loading_flower.gif" />
+    <Content Include="Content\js\icheck.min.js" />
+    <Content Include="Content\js\jquery.fs.selecter.min.js" />
+    <Content Include="Content\js\jquery.fs.stepper.min.js" />
+    <Content Include="Content\Loading.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\PopLayer.css" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\Base.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\default.js" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\jquery-Json-1.0.1.js" />
+    <Content Include="scripts\jquery-loading-0.1.0.js" />
+    <Content Include="scripts\jquery-popup-0.1.9.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="scripts\site.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ISiteUtility.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\DoYouLoginAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutofacConfig.cs" />
+    <Compile Include="Models\ExHtmlHelpers.cs" />
+    <Compile Include="Models\MailSender.cs" />
+    <Compile Include="Models\NameString.cs" />
+    <Compile Include="Models\SiteUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Content\angularicons\angularicons.eot" />
+    <Content Include="Content\angularicons\angularicons.ttf" />
+    <Content Include="Content\angularicons\angularicons.woff" />
+    <Content Include="Content\css\bootflat.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\scss\.csscomb.json" />
+    <Content Include="Content\scss\.csslintrc" />
+    <Content Include="Content\scss\bootflat.scss" />
+    <Content Include="Content\scss\bootflat\_accordion.scss" />
+    <Content Include="Content\scss\bootflat\_alert.scss" />
+    <Content Include="Content\scss\bootflat\_breadcrumb.scss" />
+    <Content Include="Content\scss\bootflat\_button.scss" />
+    <Content Include="Content\scss\bootflat\_button_group.scss" />
+    <Content Include="Content\scss\bootflat\_calendar.scss" />
+    <Content Include="Content\scss\bootflat\_checkbox_radio.scss" />
+    <Content Include="Content\scss\bootflat\_dropdown.scss" />
+    <Content Include="Content\scss\bootflat\_footer.scss" />
+    <Content Include="Content\scss\bootflat\_form.scss" />
+    <Content Include="Content\scss\bootflat\_global.scss" />
+    <Content Include="Content\scss\bootflat\_jumbotron.scss" />
+    <Content Include="Content\scss\bootflat\_label_badge.scss" />
+    <Content Include="Content\scss\bootflat\_list.scss" />
+    <Content Include="Content\scss\bootflat\_media_list.scss" />
+    <Content Include="Content\scss\bootflat\_modal.scss" />
+    <Content Include="Content\scss\bootflat\_navbar.scss" />
+    <Content Include="Content\scss\bootflat\_pager.scss" />
+    <Content Include="Content\scss\bootflat\_pagination.scss" />
+    <Content Include="Content\scss\bootflat\_panel.scss" />
+    <Content Include="Content\scss\bootflat\_pill.scss" />
+    <Content Include="Content\scss\bootflat\_popover.scss" />
+    <Content Include="Content\scss\bootflat\_pricing.scss" />
+    <Content Include="Content\scss\bootflat\_progress.scss" />
+    <Content Include="Content\scss\bootflat\_selecter.scss" />
+    <Content Include="Content\scss\bootflat\_stepper.scss" />
+    <Content Include="Content\scss\bootflat\_tab.scss" />
+    <Content Include="Content\scss\bootflat\_thumbnail.scss" />
+    <Content Include="Content\scss\bootflat\_timeline.scss" />
+    <Content Include="Content\scss\bootflat\_toggle.scss" />
+    <Content Include="Content\scss\bootflat\_tooltip.scss" />
+    <Content Include="Content\scss\bootflat\_typography.scss" />
+    <Content Include="Content\scss\bootflat\_well.scss" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_SubPage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -178,9 +265,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="scripts\" />
+    <Folder Include="Views\Default\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Parkheesung.Domain\Parkheesung.Domain.csproj">
+      <Project>{80173dd5-3bde-4f8c-8675-a5e841684723}</Project>
+      <Name>Parkheesung.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

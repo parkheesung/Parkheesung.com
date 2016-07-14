@@ -8,5 +8,6 @@ namespace Parkheesung.Domain
 {
     public class PrivateMyInfo
     {
+        public const string Secret = "615CDECA6AFB42EF";
     }
 }
