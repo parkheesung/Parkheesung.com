@@ -1,8 +1,57 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    Layout = "~/Views/Shared/_SubPage.cshtml";
 }
-
-<h2>Index</h2>
-
+<div class="rows">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active"><img src="/Content/img/Main_01.png"></div>
+                    <div class="item"><img src="/Content/img/main_02.png"></div>
+                    <div class="item"><img src="/Content/img/main_03.png"></div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+            <div class="jumbotron-contents">
+                <h2>Web Programmer</h2>
+                <p>I have liked programming from the first time. <br/>Now, enjoy the programming in spite of free time.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rows">
+    <div class="col-md-6">
+        <div class="alert alert-success alert-dismissable">
+            <h4>Contact me!</h4>
+            <p>I am using the most SNS Service.</p>
+            <p>Contact me if needed.</p>
+            <p><a class="btn btn-success" href="#">Show SNS Channel list</a></p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="https://github.com/parkheesung/ReadingShare" class="list-group-item active" target="_blank">
+                <h4 class="list-group-item-heading">Reading Information sharing - ReadingShare</h4>
+                <p class="list-group-item-text">https://github.com/parkheesung/ReadingShare</p>
+            </a>
+            <a href="https://github.com/parkheesung/KidsPlayShare" class="list-group-item" target="_blank">
+                <h4 class="list-group-item-heading">Place for Kids</h4>
+                <p class="list-group-item-text">https://github.com/parkheesung/KidsPlayShare</p>
+            </a>
+            <a href="https://github.com/parkheesung/OctopusLibrary" class="list-group-item" target="_blank">
+                <h4 class="list-group-item-heading">ASP.NET Web Development Library</h4>
+                <p class="list-group-item-text">https://github.com/parkheesung/OctopusLibrary</p>
+            </a>
+        </div>
+    </div>
+</div>

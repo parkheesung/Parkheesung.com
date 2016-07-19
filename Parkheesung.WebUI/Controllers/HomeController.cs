@@ -11,7 +11,6 @@ namespace Parkheesung.WebUI.Controllers
 
         }
 
-        // GET: Home
         public ActionResult Index()
         {
             return View();

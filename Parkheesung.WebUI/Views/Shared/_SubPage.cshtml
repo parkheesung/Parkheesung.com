@@ -1,6 +1,5 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Member member = ViewBag.member as Member;
 }
 <div class="docs-header">
     <nav class="navbar navbar-default navbar-custom" role="navigation">
@@ -15,33 +14,10 @@
                 <a class="navbar-brand" style="color:#FFF;font-weight:bold;padding:15px 15px;" href="/">@(ViewBag.Title)</a>
             </div>
             <div class="collapse navbar-collapse">
-                <div class="col-md-6 topMargin8">
-                    <div class="form-search search-only">
-                        @if (member != null && member.MemberID > 0)
-                        {
-                        <form name="searchFrm" id="searchFrm" method="post" action="/SearchReading">
-                            <i class="search-icon glyphicon glyphicon-search"></i>
-                            <input type="text" class="form-control search-query" maxlength="100" name="keyword" id="keyword" value="@(ViewBag.keyword)" />
-                        </form>
-                        }
-                        else
-                        {
-                            <i class="search-icon glyphicon glyphicon-search"></i>
-                            <input type="text" class="form-control search-query" maxlength="100" name="keyword" id="keyword" placeholder="로그인 후 이용하세요." value="" readonly />
-                        }
-                    </div>
-                </div>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (member != null && member.MemberID > 0)
-                    {
-                        <li><a class="nav-link" style="color:#FFF;" href="/Reading/MyList">내문장</a></li>
-                        <li><a class="nav-link" style="color:#FFF;" href="/Member/Setup">설정</a></li>
-                        <li><a class="nav-link" style="color:#FFF;" href="/Member/Logout">로그아웃</a></li>
-                    }
-                    else
-                    {
-                        <li><a class="nav-link" style="color:#FFF;" href="/Home/Index">로그인</a></li>
-                    }
+                    <li><a class="nav-link" style="color:#FFF;" href="/Reading/MyList">Profile</a></li>
+                    <li><a class="nav-link" style="color:#FFF;" href="/Member/Setup">설정</a></li>
+                    <li><a class="nav-link" style="color:#FFF;" href="/Member/Logout">로그아웃</a></li>
                 </ul>
             </div>
         </div>
@@ -55,24 +31,22 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>Found a bug?</h3>
-                <p>Open a <a href="https://github.com/parkheesung/Parkheesung/issues" target="_blank" rel="external nofollow">new issue</a> on GitHub. Please search for existing issues first and make sure to include all relevant information.</p>
-                <a class="btn btn-primary" style="color:#FFF;" href="https://github.com/parkheesung/Parkheesung" target="_blank">Github Project</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p>Open a <a href="https://github.com/parkheesung/Parkheesung.com/issues" target="_blank" rel="external nofollow">new issue</a> on GitHub. Please search for existing issues first and make sure to include all relevant information.</p>
+                <a class="btn btn-primary" style="color:#FFF;" href="https://github.com/parkheesung/Parkheesung.com" target="_blank">Github Project</a>&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </div>
         <hr class="dashed">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h3>Talk to us</h3>
                 <ul>
-                    <li>Facebook us at <a href="https://www.facebook.com/yunlang97" target="_blank">Parkheesung</a>&nbsp;&nbsp;&nbsp;&nbsp;Email us at <span class="connect">yunlang@parkheesung.com</span></li>
+                    <li>Facebook us at <a href="https://www.facebook.com/yunlang97" target="_blank">Parkheesung</a>&nbsp;&nbsp;&nbsp;&nbsp;Email us at <a href="mailto:yunlang@parkheesung.com" class="connect">yunlang@parkheesung.com</a></li>
                 </ul>
-            </div>
-            <div class="col-md-6">
             </div>
         </div>
         <hr class="dashed">
         <div class="copyright clearfix">
-            <p><b>@(ViewBag.Title)</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Reading/MyList">내문장</a>&nbsp;•&nbsp;<a href="/Member/Setup">설정</a></p>
+            <p><b>@(ViewBag.Title)</b></p>
             <p><a href="https://parkheesung.com" target="_blank">Parkheesung.com</a>. All rights reserved.</p>
         </div>
     </div>
