@@ -14,6 +14,8 @@ namespace Parkheesung.Domain.Abstract
         ReturnData MemberAdd(Member member);
         Task<ReturnData> MemberAddAsync(Member member);
         ReturnData MemberLogin(string Email, string Password);
+        ReturnData MemberLoginFromExternal(string Email, string Password);
+        ReturnData MemberLoginFromFacebookExternal(string FacebookID, string token);
         Task<ReturnData> MemberLoginAsync(string Email, string Password);
         ReturnData MemberLoginLogRegist(long MemberID, string UserIP);
         Member GetMember(string token);
@@ -24,5 +26,7 @@ namespace Parkheesung.Domain.Abstract
         Member FindEmail(string Email);
         ReturnData GetNewPassword(long MemberID);
         Member FindEmailWithFacebookID(string Email, string FacebookID);
+        ReturnData UpdateMemberInfo(SetupMember setup, long MemberID);
+        Member GetMemberFromExternalToken(string Token);
     }
 }

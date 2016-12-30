@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="pen-title">
+    <h1>단어암기장 - vNote</h1>
+</div>
+<!-- Form Module-->
+<div class="module form-module">
+    <div class="toggle">
+        <i class="fa fa-times fa-pencil"></i>
+        <div class="tooltip">Click Me</div>
+    </div>
+    <div class="form">
+        <h2>Login to your account</h2>
+        <form name="loginFrm" id="loginFrm" method="post" onsubmit="return MemberLogin(this); return false;">
+            <input type="email" name="UserMail" id="UserMail" maxlength="254" placeholder="UserEmail" />
+            <input type="password" name="UserPWD" id="UserPWD" maxlength="100" placeholder="Password" />
+            <button type="submit">Login</button>
+            <button type="button" class="facebook topMargin3" onclick="FacebookLogin();">Facebook Login</button>
+        </form>
+    </div>
+    <div class="form">
+        <h2>Create an account</h2>
+        <form name="joinFrm" id="joinFrm" method="post" onsubmit="return MemberJoin(this);">
+            <input type="email" name="Email" id="Email" maxlength="254" placeholder="Email Address" />
+            <input type="password" name="Password" id="Password" maxlength="100" placeholder="Password" />
+            <input type="password" name="confirmPwd" id="confirmPwd" maxlength="100" placeholder="Confirm Password" />
+            <input type="text" name="Name" id="Name" placeholder="Username" />
+            <button type="submit">Register</button>
+            <button type="button" class="facebook topMargin3" onclick="FacebookJoin();">Facebook Join</button>
+
+        </form>
+    </div>
+    <div class="cta"><a href="/Member/NewPasswordToEmail">Forgot your password?</a></div>
+</div>
+
+@section HeadLayer {
+    <link href="/Content/reset.css" rel="stylesheet" />
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link href="/Content/login.css" rel="stylesheet" />
+}
+
+@section ScriptLayer {
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.toggle').click(function () {
+            // Switches the Icon
+            $(this).children('i').toggleClass('fa-pencil');
+            // Switches the forms
+            $('.form').animate({
+                height: "toggle",
+                'padding-top': 'toggle',
+                'padding-bottom': 'toggle',
+                opacity: "toggle"
+            }, "slow");
+        });
+
+        $("#UserMail").focus();
+    });
+    </script>
+}

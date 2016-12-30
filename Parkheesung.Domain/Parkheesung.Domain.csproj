@@ -89,6 +89,7 @@
     <Compile Include="Database\EFDbMigrator.cs" />
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\MemberLoginLog.cs" />
+    <Compile Include="Entities\TokenAuth.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FacebookMember.cs" />
     <Compile Include="Models\JoinMember.cs" />

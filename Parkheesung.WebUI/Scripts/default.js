@@ -82,7 +82,7 @@ function MemberLogin(frm) {
 
         $.post("/Member/LoginMemberProc", jsonData, function (rst) {
             if (rst.Check) {
-                location.href = "/Main"
+                location.href = "/"
             } else {
                 alert(rst.Message);
                 $("body").loading(false);

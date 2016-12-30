@@ -36,6 +36,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 /* ----------------------------------
  * btn-group & labels
  * ---------------------------------- */
+.btn{margin-top:3px;}
+
 .blank {
     display: none;
 }
@@ -138,3 +140,77 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .dashed {
     border-top-color:#e6e6e6 !important;
 }
+
+/* ----------------------------------
+ * home
+ * ---------------------------------- */
+
+.home{
+    width:100%;
+    padding:15% 5px;
+    color:#fff;
+    text-align:center;
+    font-size:1.6em;
+    line-height:1.8em;
+    background: url('/Content/img/vNote_home.jpg');
+    margin:-20px 0 20px 0;
+}
+.home>a{margin-top:50px; font-size:16px;}
+
+@media (max-width:768px){
+  .home>h3{font-size:20px;}
+  .home>h4{font-size:15px;}
+}
+
+/* ----------------------------------
+ * Main
+ * ---------------------------------- */
+.mainColumn{ margin:10% auto;}
+.mainColumn .col-md-4{height:410px;}
+.mainColumn .col-md-4>.thumbnail{height: 100%; color:#fff; text-align: center; cursor: pointer;}
+.mainColumn .col-md-4:nth-child(1)>.thumbnail{background-color:#DA4453;}
+.mainColumn .col-md-4:nth-child(2)>.thumbnail{background-color:#5D9CEC;}
+.mainColumn .col-md-4:nth-child(3)>.thumbnail{background-color:#FFCE54;}
+.mainColumn .col-md-4>.thumbnail>img{width:auto; margin:80px auto;}
+
+@media (max-width:768px){
+  .mainColumn .col-md-4{height:140px;margin-bottom:10px;}
+  .mainColumn .col-md-4>.thumbnail>h4{font-size:1em; margin:30px auto;}
+  .mainColumn .col-md-4>.thumbnail>img{width:100px; margin:16px 10px; float: left;}
+}
+
+
+/* ----------------------------------
+ * TodoList
+ * ---------------------------------- */
+
+.subject{margin-top: 30px;}
+.subject>.col-md-8>h3{margin-top: 0;}
+.table>tbody tr>td>.btn-primary{margin-right:3px;}
+.table{margin-top:10px;}
+
+
+
+/* ----------------------------------
+ * test page (FromKey, FromValue, testCompleted)
+ * ---------------------------------- */
+.word { padding:10% 0 10% 0 !important; text-align:center;font-size:2em;font-weight:bold; }
+.btn_height_60 { padding-top:30px !important; padding-bottom:30px !important; }
+
+/* ----------------------------------
+ * test Completed
+ * ---------------------------------- */
+
+.alert-warning>h4{display: inline-block; margin-right:230px;}
+@media  (max-width: 768px){
+  .alert-warning>h4{margin-right:25px;}
+}
+
+
+/* ----------------------------------
+ * add word form
+ * ---------------------------------- */
+.form-control{margin:2px auto;}
+
+
+.noRound { border-radius:0px !Important;-moz-border-radius:0px !Important;-webkit-border-radius:0px !Important; }

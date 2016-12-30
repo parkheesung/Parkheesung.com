@@ -7,6 +7,7 @@ namespace Parkheesung.Domain.Database
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<MemberLoginLog> MemberLoginLogs { get; set; }
+        public DbSet<TokenAuth> TokenAuths { get; set; }
 
 
         public EFDbContext() : base("name=EFDbContext")

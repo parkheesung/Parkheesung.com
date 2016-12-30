@@ -47,7 +47,7 @@ namespace Parkheesung.WebUI.Controllers
 
             if (!String.IsNullOrEmpty(this.token))
             {
-                //this.member = this.rep.GetMember(this.token);
+                this.member = this.rep.GetMember(this.token);
                 ViewBag.member = this.member;
             }
         }

@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_SubPage.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="well bs-component">
+            <form name="frm" id="frm" method="post" action="" onsubmit="return ManageConfirm();" class="form-horizontal">
+                <fieldset>
+                    <legend>User Password</legend>
+                    <div class="form-group">
+                        <label for="UserPWD" class="col-md-2 control-label">Password</label>
+                        <div class="col-md-10">
+                            <input type="password" class="form-control" id="UserPWD" name="UserPWD" value="" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Member member = ViewBag.member as Member;
 }
 <div class="docs-header">
-    <nav class="navbar navbar-default navbar-custom" role="navigation">
+    <nav class="navbar navbar-inverse navbar-custom noRound" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -15,10 +16,19 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="nav-link" style="color:#FFF;" href="/Reading/MyList">Profile</a></li>
-                    <li><a class="nav-link" style="color:#FFF;" href="/Member/Setup">설정</a></li>
-                    <li><a class="nav-link" style="color:#FFF;" href="/Member/Logout">로그아웃</a></li>
+                    <li><a class="nav-link" style="color:#FFF;" href="/Profile">Profile</a></li>
+                    @if (member != null && member.MemberID > 0)
+                    {
+                        <li><a class="nav-link" style="color:#FFF;" href="/Account">계정관리</a></li>
+                        <li><a class="nav-link" style="color:#FFF;" href="/Member/Setup">설정</a></li>
+                        <li><a class="nav-link" style="color:#FFF;" href="/Member/Logout">로그아웃</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="nav-link" style="color:#FFF;" href="/Member/Login">로그인</a></li>
+                    }
                 </ul>
+
             </div>
         </div>
     </nav>

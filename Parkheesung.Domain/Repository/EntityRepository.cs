@@ -120,6 +120,127 @@ namespace Parkheesung.Domain.Repository
         }
 
         /// <summary>
+        /// 로그인 처리 프로세스
+        /// </summary>
+        /// <param name="Email">회원 이메일</param>
+        /// <param name="Password">비밀번호</param>
+        /// <returns>ReturnData</returns>
+        public ReturnData MemberLoginFromExternal(string Email, string Password)
+        {
+            ReturnData result = new ReturnData();
+
+            if (String.IsNullOrEmpty(Email))
+            {
+                result.Error("이메일 정보를 입력해 주세요.");
+            }
+            else if (String.IsNullOrEmpty(Password))
+            {
+                result.Error("이름을 입력하세요.");
+            }
+            else
+            {
+                using (var context = new EFDbContext())
+                {
+                    Member member = context.Members.Where(x => x.IsEnabled == true)
+                                                   .Where(x => x.Email.ToLower() == Email.ToLower())
+                                                   .FirstOrDefault();
+
+                    if (member != null && member.MemberID > 0)
+                    {
+                        if (OctopusLibrary.Crypto.Sha512.ValidatePassword(Password, member.Password))
+                        {
+                            TokenAuth auth = new TokenAuth()
+                            {
+                                IsEnabled = true,
+                                MemberID = member.MemberID,
+                                ExpiredDate = DateTime.Now.AddMonths(1),
+                                RegDate = DateTime.Now,
+                                UserToken = Guid.NewGuid().ToString(),
+                                FacebookToken = ""
+                            };
+
+                            context.TokenAuths.Add(auth);
+                            context.SaveChanges();
+
+                            if (auth.TokenAuthID > 0)
+                            {
+                                result.Success(member.MemberID, "", auth.UserToken);
+                            }
+                            else
+                            {
+                                result.Error("권한 발급이 실패하였습니다.");
+                            }
+                        }
+                        else
+                        {
+                            result.Error("비밀번호가 일치하지 않습니다.");
+                        }
+                    }
+                    else
+                    {
+                        result.Error("해당 이메일로 가입된 내역이 없습니다.");
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public ReturnData MemberLoginFromFacebookExternal(string FacebookID, string token)
+        {
+            ReturnData result = new ReturnData();
+
+            if (String.IsNullOrEmpty(FacebookID))
+            {
+                result.Error("페이스북 아이디를 입력해 주세요.");
+            }
+            else if (String.IsNullOrEmpty(token))
+            {
+                result.Error("토큰을 입력하세요.");
+            }
+            else
+            {
+                using (var context = new EFDbContext())
+                {
+                    Member member = context.Members.Where(x => x.IsEnabled == true)
+                                                   .Where(x => x.FacebookID.Trim() == FacebookID.Trim())
+                                                   .FirstOrDefault();
+
+                    if (member != null && member.MemberID > 0)
+                    {
+                        TokenAuth auth = new TokenAuth()
+                        {
+                            IsEnabled = true,
+                            MemberID = member.MemberID,
+                            ExpiredDate = DateTime.Now.AddMonths(1),
+                            RegDate = DateTime.Now,
+                            UserToken = Guid.NewGuid().ToString(),
+                            FacebookToken = token
+                        };
+
+                        context.TokenAuths.Add(auth);
+                        context.SaveChanges();
+
+                        if (auth.TokenAuthID > 0)
+                        {
+                            result.Success(member.MemberID, "", auth.UserToken);
+                        }
+                        else
+                        {
+                            result.Error("권한 발급이 실패하였습니다.");
+                        }
+                    }
+                    else
+                    {
+                        result.Error("해당 이메일로 가입된 내역이 없습니다.");
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 로그인 처리 프로세스 (비동기)
         /// </summary>
         /// <param name="Email">회원 이메일</param>
@@ -258,7 +379,6 @@ namespace Parkheesung.Domain.Repository
                     if (String.IsNullOrEmpty(setup.NowPass))
                     {
                         member.Name = setup.Name;
-                        member.UserPhotoURL = setup.UserPhotoURL;
                         member.LastUpdate = DateTime.Now;
                         context.SaveChanges();
                         result.Success(member.MemberID);
@@ -268,7 +388,6 @@ namespace Parkheesung.Domain.Repository
                         if (OctopusLibrary.Crypto.Sha512.ValidatePassword(setup.NowPass, member.Password))
                         {
                             member.Name = setup.Name;
-                            member.UserPhotoURL = setup.UserPhotoURL;
                             member.LastUpdate = DateTime.Now;
                             member.Password = OctopusLibrary.Crypto.Sha512.CreateHash(setup.NewPass);
                             context.SaveChanges();
@@ -289,32 +408,6 @@ namespace Parkheesung.Domain.Repository
             return result;
         }
 
-        public Member JoinInfoConvertMemberWithFacebook(FacebookMember join)
-        {
-            if (String.IsNullOrEmpty(join.FacebookID))
-            {
-                return null;
-            }
-            else
-            {
-
-                Member member = new Member
-                {
-                    Email = join.Email,
-                    Name = join.Name,
-                    IsEnabled = true,
-                    Password = OctopusLibrary.Crypto.Sha512.CreateHash(join.Password),
-                    RegDate = DateTime.Now,
-                    UserToken = Guid.NewGuid().ToString(),
-                    IsFacebook = true,
-                    FacebookID = join.FacebookID,
-                    UserPhotoURL = String.Format("https://graph.facebook.com/{0}/picture?width=100&height=100", join.FacebookID)
-                };
-
-                return member;
-            }
-        }
-
         /// <summary>
         /// 이메일을 기준으로 회원정보를 찾습니다.
         /// </summary>
@@ -327,6 +420,26 @@ namespace Parkheesung.Domain.Repository
             using (var context = new EFDbContext())
             {
                 member = context.Members.Where(x => x.Email.ToLower() == Email.ToLower()).FirstOrDefault();
+            }
+
+            return member;
+        }
+
+        /// <summary>
+        /// 이메일과 페이스북 아이디로 계정 조회
+        /// </summary>
+        /// <param name="Email">이메일</param>
+        /// <param name="FacebookID">페이스북 아이디</param>
+        /// <returns>Member</returns>
+        public Member FindEmailWithFacebookID(string Email, string FacebookID)
+        {
+            Member member = new Member();
+
+            using (var context = new EFDbContext())
+            {
+                member = context.Members.Where(x => x.Email.ToLower() == Email.ToLower())
+                                        .Where(x => x.FacebookID == FacebookID)
+                                        .FirstOrDefault();
             }
 
             return member;
@@ -374,21 +487,55 @@ namespace Parkheesung.Domain.Repository
             return result;
         }
 
+        public Member JoinInfoConvertMemberWithFacebook(FacebookMember join)
+        {
+            if (String.IsNullOrEmpty(join.FacebookID))
+            {
+                return null;
+            }
+            else
+            {
+
+                Member member = new Member
+                {
+                    Email = join.Email,
+                    Name = join.Name,
+                    IsEnabled = true,
+                    Password = OctopusLibrary.Crypto.Sha512.CreateHash(join.Password),
+                    RegDate = DateTime.Now,
+                    UserToken = Guid.NewGuid().ToString(),
+                    IsFacebook = true,
+                    FacebookID = join.FacebookID,
+                    UserPhotoURL = String.Format("https://graph.facebook.com/{0}/picture?width=100&height=100", join.FacebookID)
+                };
+
+                return member;
+            }
+        }
+
         /// <summary>
-        /// 이메일과 페이스북 아이디로 계정 조회
+        /// 외부에서 로그인 정보를 확인할 경우
         /// </summary>
-        /// <param name="Email">이메일</param>
-        /// <param name="FacebookID">페이스북 아이디</param>
+        /// <param name="Token">외부 토큰</param>
         /// <returns>Member</returns>
-        public Member FindEmailWithFacebookID(string Email, string FacebookID)
+        public Member GetMemberFromExternalToken(string Token)
         {
             Member member = new Member();
 
-            using (var context = new EFDbContext())
+            if (!String.IsNullOrEmpty(Token))
             {
-                member = context.Members.Where(x => x.Email.ToLower() == Email.ToLower())
-                                        .Where(x => x.FacebookID == FacebookID)
-                                        .FirstOrDefault();
+                using (var context = new EFDbContext())
+                {
+                    TokenAuth auth = context.TokenAuths.Where(x => x.UserToken == Token)
+                                                                         .Where(x => x.IsEnabled)
+                                                                         .Where(x => x.ExpiredDate > DateTime.Now)
+                                                                         .FirstOrDefault();
+
+                    if (auth != null && auth.TokenAuthID > 0)
+                    {
+                        member = context.Members.Where(x => x.MemberID == auth.MemberID).FirstOrDefault();
+                    }
+                }
             }
 
             return member;

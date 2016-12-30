@@ -20,7 +20,7 @@ namespace Parkheesung.WebUI.Filters
 
             if (String.IsNullOrEmpty(token))
             {
-                filterContext.Result = new RedirectResult("/Home/Index");
+                filterContext.Result = new RedirectResult("/Member/Login");
             }
         }
     }
