@@ -399,3 +399,27 @@ function FacebookInfo(name, email, id, callback) {
         });
     }
 };
+
+function AccountConfirm() {
+    if ($("#UserPWD").val() == "") {
+        alert("비밀번호를 입력하세요.");
+        $("#UserPWD").focus();
+        return false;
+    } else {
+        $("body").loading(true);
+        $.post("/Account/UserConfirm", { UserPWD: $("#UserPWD").val() }, function (data) {
+            try {
+                if (data.Check) {
+                    location.href = "/Account/AccountList";
+                } else {
+                    alert(data.Message);
+                }
+            } catch (e) {
+                alert(e.message);
+            } finally {
+                $("body").loading(false);
+            }
+        });
+        return false;
+    }
+};

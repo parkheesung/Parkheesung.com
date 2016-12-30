@@ -19,5 +19,6 @@ namespace Parkheesung.WebUI.Abstract
         Member Me(DefaultController controller);
         string CryptoToken(string originalString);
         string DecryptToken(string cryptoString);
+        bool SessionCheck(Member member);
     }
 }

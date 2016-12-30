@@ -87,6 +87,10 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Database\EFDbContext.cs" />
     <Compile Include="Database\EFDbMigrator.cs" />
+    <Compile Include="Database\EFDbReadOnlyContext.cs" />
+    <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\AccountGroup.cs" />
+    <Compile Include="Entities\AccountView.cs" />
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\MemberLoginLog.cs" />
     <Compile Include="Entities\TokenAuth.cs" />

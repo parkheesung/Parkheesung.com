@@ -542,5 +542,11 @@ namespace Parkheesung.Domain.Repository
         }
 
         #endregion [회원관련]
+
+        #region [계정관리]
+
+
+
+        #endregion [계정관리]
     }
 }

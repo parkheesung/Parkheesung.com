@@ -83,5 +83,24 @@ namespace Parkheesung.WebUI.Models
         {
             return controller.member;
         }
+
+        public bool SessionCheck(Member member)
+        {
+            if (HttpContext.Current.Session[NameString.LoginCookie] != null && String.IsNullOrEmpty(Convert.ToString(HttpContext.Current.Session[NameString.LoginCookie])))
+            {
+                if (member.UserToken.Equals(Convert.ToString(HttpContext.Current.Session[NameString.LoginCookie])))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
