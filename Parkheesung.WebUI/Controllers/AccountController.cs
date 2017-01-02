@@ -1,6 +1,7 @@
 ﻿using OctopusLibrary;
 using OctopusLibrary.Filters;
 using OctopusLibrary.Models;
+using Parkheesung.Domain;
 using Parkheesung.Domain.Abstract;
 using Parkheesung.Domain.Entities;
 using Parkheesung.WebUI.Abstract;
@@ -83,6 +84,9 @@ namespace Parkheesung.WebUI.Controllers
             ViewBag.Keyword = Keyword;
             ViewBag.GroupID = GroupID;
             ViewBag.groupList = groupList;
+
+            accountInfo.UserID = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserID, PrivateMyInfo.Secret, false);
+            accountInfo.UserPWD = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserPWD, PrivateMyInfo.Secret, false);
 
             return View(accountInfo);
         }

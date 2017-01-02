@@ -93,90 +93,6 @@ function MemberLogin(frm) {
     return false;
 };
 
-//문장 등록
-function registSentence() {
-    if (IsNullOrEmpty($("#Content").val())) {
-        alert("문장을 입력해 주세요.");
-        $("#Content").focus();
-    } else {
-        $("body").loading(true);
-        var jsonData = $("#frm").toJson();
-
-        $.post("/Reading/RegistSentenceProc", jsonData, function (rst) {
-            if (rst.Check) {
-                location.href = "/ReadingView/" + rst.Value;
-            } else {
-                alert(rst.Message);
-                $("body").loading(false);
-            }
-        });
-    }
-};
-
-//문장 수정
-function updateSentence() {
-    if (IsNullOrEmpty($("#Content").val())) {
-        alert("문장을 입력해 주세요.");
-        $("#Content").focus();
-    } else {
-        $("body").loading(true);
-        var jsonData = $("#frm").toJson();
-
-        $.post("/Reading/UpdateSentenceProc", jsonData, function (rst) {
-            if (rst.Check) {
-                location.href = "/ReadingView/" + rst.Value;
-            } else {
-                alert(rst.Message);
-                $("body").loading(false);
-            }
-        });
-    }
-};
-
-//해석 저장
-function SaveAnswer() {
-    var answer = $("#Answer").val();
-
-    if (IsNullOrEmpty(answer)) {
-        alert("내용을 작성해 주세요.");
-        $("#Answer").focus();
-    } else {
-        $("body").loading(true);
-        var jsonData = $("#frm").toJson();
-
-        $.post("/Reading/RegistInterpret", jsonData, function (rst) {
-            if (rst.Check) {
-                document.location.reload();
-            } else {
-                alert(rst.Message);
-                $("body").loading(false);
-            }
-        });
-    }
-};
-
-//해석 수정
-function UpdateAnswer(token) {
-    var answer = $("#Answer").val();
-
-    if (IsNullOrEmpty(answer)) {
-        alert("내용을 작성해 주세요.");
-        $("#Answer").focus();
-    } else {
-        $("body").loading(true);
-        var jsonData = $("#frm").toJson();
-
-        $.post("/Reading/UpdateInterpret", jsonData, function (rst) {
-            if (rst.Check) {
-                location.href = "/ReadingView/" + token;
-            } else {
-                alert(rst.Message);
-                $("body").loading(false);
-            }
-        });
-    }
-};
-
 //회원정보 수정
 function SaveSetup() {
     var jsonData = $("#frm").toJson();
@@ -204,7 +120,7 @@ function SaveSetup() {
         $("body").loading(true);
         var jsonData = $("#frm").toJson();
 
-        $.post("/Reading/SaveSetupProc", jsonData, function (rst) {
+        $.post("/Member/SaveSetupProc", jsonData, function (rst) {
             if (rst.Check) {
                 alert("저장하였습니다.");
                 document.location.reload();
@@ -214,90 +130,6 @@ function SaveSetup() {
             }
         });
     }
-};
-
-//프로필 업로드창 호출
-function profileUploader(memberID) {
-    $("body").openLayer({
-        url: "/Member/ProfileUpload?MemberID=" + memberID,
-        frmw: 400,
-        frmh: 220,
-        IsScroll: false
-    });
-};
-
-//프로필 이미지 업로드 체크 함수
-function checkProfileUpload() {
-    var fileURL = $("#FileURL").val();
-    var memberID = $("#MemberID").val();
-
-    if (IsNullOrEmpty(fileURL))
-    {
-        alert("업로드할 이미지를 선택해 주세요.");
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-};
-
-//다음 목록 가져오기
-function GetRows(mode, opt) {
-    NowPage = NowPage + 1;
-
-    switch (mode) {
-        case "List":
-            $.post("/Reading/AddListwithList", { curPage: NowPage }, function (list) {
-                RowsWrite(list);
-            });
-            break;
-        case "Best":
-            $.post("/Reading/AddListwithBestList", { curPage: NowPage }, function (list) {
-                RowsWrite(list);
-            });
-            break;
-        case "MyList":
-            $.post("/Reading/AddListwithMyList", { curPage: NowPage }, function (list) {
-                RowsWrite(list);
-            });
-            break;
-        case "Search":
-            $.post("/Reading/AddListwithSearchList", { keyword: opt, curPage: NowPage }, function (list) {
-                RowsWrite(list);
-            });
-            break;
-    }
-};
-
-//가져온 목록을 태그로 작성하기
-function RowsWrite(rows) {
-    if (rows != null && rows.length > 0 && document.getElementById("appendList") != null) {
-        var tags = "";
-        for (var i = 0; i < rows.length; i++) {
-            tags += "<a href=\"/ReadingView/" + rows[i].UrlToken;
-            tags += "\" class=\"list-group-item\">";
-            tags += "<span class=\"badge badge-primary\">" + rows[i].ItemCount;
-            tags += "</span>" + rows[i].Content;
-            tags += "</a>";
-        }
-
-        $("#appendList").append(tags);
-    } else {
-        alert("더이상 없습니다.");
-    }
-};
-
-//추천하기
-function InterpretRecommend(interpretID) {
-    $.post("/Reading/AddRecommendProc", { InterpretID: interpretID }, function (rst) {
-        if (rst.Check) {
-            alert("추천하였습니다.");
-            document.location.reload();
-        } else {
-            alert(rst.Message);
-        }
-    });
 };
 
 //비밀번호 찾기
@@ -355,6 +187,18 @@ function FacebookLogin() {
             $("body").loading(false);
         }
     }, { scope: 'public_profile,email' });
+};
+
+function GetFacebookInfo(callback) {
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            FB.api('/me', { fields: 'name, email' }, function (result) {
+                callback(result.id);
+            });
+        } else {
+            alert("페이스북에 먼저 로그인 해주세요!");
+        }
+    });
 };
 
 function FacebookJoin() {
@@ -573,4 +417,12 @@ function AccountErase(accountID, backURL) {
             }
         });
     }
+};
+
+function LoadFacebookPW() {
+    $("body").loading(true);
+    GetFacebookInfo(function (facebookID) {
+        $("#NowPass").val(facebookID);
+        $("body").loading(false);
+    });
 };

@@ -17,7 +17,7 @@ namespace Parkheesung.Domain.Entities
 
         [Required]
         [Column(TypeName = SqlType.NVarChar)]
-        [StringLength(150)]
+        [StringLength(200)]
         public string Title { get; set; }
 
         [Required]
@@ -25,19 +25,19 @@ namespace Parkheesung.Domain.Entities
 
         [Required]
         [Column(TypeName = SqlType.VarChar)]
-        [StringLength(250)]
+        [StringLength(500)]
         public string UserID { get; set; }
 
         [Required]
         [Column(TypeName = SqlType.VarChar)]
-        [StringLength(300)]
+        [StringLength(500)]
         public string UserPWD { get; set; }
 
         [Column(TypeName = SqlType.VarChar)]
-        [StringLength(250)]
+        [StringLength(500)]
         public string AccessURL { get; set; }
 
-        [Column(TypeName = SqlType.VarChar)]
+        [Column(TypeName = SqlType.NVarChar)]
         public string Memo { get; set; }
 
         [DefaultValue(true)]
