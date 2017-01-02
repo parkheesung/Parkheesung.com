@@ -3,7 +3,7 @@
 $(document).ready(function () {
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '1127075374030570',
+            appId: '188436634692049',
             xfbml: true,
             cookie: true,
             version: 'v2.6'
@@ -338,7 +338,7 @@ function FacebookLogin() {
                     if (rst.Check) {
                         $.post("/Member/LoginMemberProc", { UserMail: result.email, UserPWD: rst.Value }, function (rst) {
                             if (rst.Check) {
-                                location.href = "/Main"
+                                location.href = "/"
                             } else {
                                 alert(rst.Message);
                                 $("body").loading(false);

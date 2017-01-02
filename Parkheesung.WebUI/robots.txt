@@ -1,0 +1,4 @@
+﻿User-agent:*
+Disallow:/Account
+Disallow:/v1
+Disallow:/API

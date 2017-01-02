@@ -84,5 +84,19 @@ namespace Parkheesung.WebUI.Models
         {
             return controller.member;
         }
+
+        public static string Get(params string[] parameters)
+        {
+            StringBuilder domain = new StringBuilder();
+            domain.AppendFormat("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Host);
+            if (parameters.Length > 0)
+            {
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    domain.AppendFormat("/{0}", parameters[i]);
+                }
+            }
+            return domain.ToString();
+        }
     }
 }

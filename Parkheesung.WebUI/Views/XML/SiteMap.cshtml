@@ -1,0 +1,20 @@
+﻿@using Parkheesung.WebUI.Models
+@model SiteMapData
+@{
+    ViewBag.Title = "SiteMap";
+    Layout = "~/Views/Shared/_Xml.cshtml";
+}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    @if (Model != null && Model.url.Count > 0)
+    {
+        foreach (var site in Model.url)
+        {
+            <url>
+                <loc>@(site.loc)</loc>
+                <lastmod>@(site.lastmod)</lastmod>
+                <changefreq>@(site.changefreq)</changefreq>
+                <priority>@(site.priority)</priority>
+            </url>
+        }
+    }
+</urlset>
