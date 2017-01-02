@@ -410,7 +410,7 @@ function AccountConfirm() {
         $.post("/Account/UserConfirm", { UserPWD: $("#UserPWD").val() }, function (data) {
             try {
                 if (data.Check) {
-                    location.href = "/Account/AccountList";
+                    location.href = "/Account/List";
                 } else {
                     alert(data.Message);
                 }
@@ -421,5 +421,156 @@ function AccountConfirm() {
             }
         });
         return false;
+    }
+};
+
+function GroupEdit(GroupID, GroupName) {
+    $("#GroupName").val(GroupName);
+    $("#GroupID").val(GroupID);
+};
+
+function GroupReset() {
+    $("#GroupName").val("");
+    $("#GroupID").val("");
+};
+
+function GroupSave() {
+    var groupname = $("#GroupName").val();
+    var groupid = $("#GroupID").val();
+    if (groupname == "") {
+        alert("그룹명을 입력하세요.");
+        $("#GroupName").focus();
+    } else {
+        $("body").loading(true);
+        $.post("/Account/GroupSave", { GroupName: groupname, GroupID: groupid }, function (data) {
+            try {
+                if (data.Check) {
+                    document.location.reload();
+                } else {
+                    alert(data.Message);
+                }
+            } catch (e) {
+                alert(e.message);
+            } finally {
+                $("body").loading(false);
+            }
+        });
+    }
+};
+
+function GroupErase(groupID) {
+    if (document.getElementById("gList_" + String(groupID)) != null) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            $("body").loading(true);
+            $.post("/Account/GroupRemove", { GroupID: groupID }, function (data) {
+                try {
+                    if (data.Check) {
+                        $("#gList_" + String(groupID)).remove();
+                    } else {
+                        alert(data.Message);
+                    }
+                } catch (e) {
+                    alert(e.message);
+                } finally {
+                    $("body").loading(false);
+                }
+            });
+        }
+    }
+};
+
+function AccountSave(backURL) {
+    var params = {
+        Title: $("#Title").val(),
+        UserID: $("#UserID").val(),
+        UserPWD: $("#UserPWD").val(),
+        AccessURL: $("#AccessURL").val(),
+        Memo: $("#Memo").val(),
+        GroupID: $("#GroupID").val()
+    };
+
+    if (IsNullOrEmpty(params.Title)) {
+        alert("제목을 입력하세요.");
+        $("#Title").focus();
+    } else if (IsNullOrEmpty(params.UserID)) {
+        alert("아이디를 입력하세요.");
+        $("#UserID").focus();
+    } else if (IsNullOrEmpty(params.UserPWD)) {
+        alert("비밀번호를 입력하세요.");
+        $("#UserPWD").focus();
+    } else {
+        $("body").loading(true);
+        $.post("/Account/AccountSaveProc", params, function (data) {
+            try {
+                if (data.Check) {
+                    alert("저장하였습니다.");
+                    location.href = backURL + data.Value;
+                } else {
+                    alert(data.Message);
+                }
+            } catch (e) {
+                alert(e.message);
+            } finally {
+                $("body").loading(false);
+            }
+        });
+    }
+};
+
+function AccountUpdate(backURL) {
+    var params = {
+        AccountID : $("#AccountID").val(),
+        Title: $("#Title").val(),
+        UserID: $("#UserID").val(),
+        UserPWD: $("#UserPWD").val(),
+        AccessURL: $("#AccessURL").val(),
+        Memo: $("#Memo").val(),
+        GroupID: $("#GroupID").val()
+    };
+
+    if (IsNullOrEmpty(params.Title)) {
+        alert("제목을 입력하세요.");
+        $("#Title").focus();
+    } else if (IsNullOrEmpty(params.UserID)) {
+        alert("아이디를 입력하세요.");
+        $("#UserID").focus();
+    } else if (IsNullOrEmpty(params.UserPWD)) {
+        alert("비밀번호를 입력하세요.");
+        $("#UserPWD").focus();
+    } else {
+        $("body").loading(true);
+        $.post("/Account/AccountSaveProc", params, function (data) {
+            try {
+                if (data.Check) {
+                    alert("저장하였습니다.");
+                    location.href = backURL;
+                } else {
+                    alert(data.Message);
+                }
+            } catch (e) {
+                alert(e.message);
+            } finally {
+                $("body").loading(false);
+            }
+        });
+    }
+};
+
+function AccountErase(accountID, backURL) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+        $("body").loading(true);
+        $.post("/Account/AccountRemove", { AccountID: accountID }, function (data) {
+            try {
+                if (data.Check) {
+                    location.href = backURL;
+                } else {
+                    alert(data.Message);
+                }
+            } catch (e) {
+                alert(e.message);
+            } finally {
+                $("body").loading(false);
+            }
+        });
     }
 };

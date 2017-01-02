@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Parkheesung.Domain.Entities
 {
-    public class AccountGroup
+    public class Link
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public long GroupID { get; set; }
+        public long AccountID { get; set; }
 
         [Required]
         public long MemberID { get; set; }
@@ -18,15 +19,15 @@ namespace Parkheesung.Domain.Entities
         [Required]
         [Column(TypeName = SqlType.NVarChar)]
         [StringLength(150)]
-        public string GroupName { get; set; }
+        public string Title { get; set; }
 
-        [DefaultValue(true)]
-        public bool IsActive { get; set; }
+        [Required]
+        [Column(TypeName = SqlType.VarChar)]
+        [StringLength(250)]
+        public string URL { get; set; }
 
-        [Column(TypeName = SqlType.DateTime2)]
-        public DateTime RegDate { get; set; }
-
-        [Column(TypeName = SqlType.DateTime2)]
-        public DateTime LastUpdate { get; set; }
+        [Column(TypeName = SqlType.VarChar)]
+        [StringLength(250)]
+        public string LinkImage { get; set; }
     }
 }

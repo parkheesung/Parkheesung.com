@@ -20,6 +20,14 @@ namespace Parkheesung.Domain.Database
             }
         }
 
+        public DbQuery<AccountGroupView> AccountGroupView
+        {
+            get
+            {
+                return Set<AccountGroupView>().AsNoTracking();
+            }
+        }
+
         public override int SaveChanges()
         {
             throw new InvalidOperationException("This context is read-only.");
@@ -28,6 +36,7 @@ namespace Parkheesung.Domain.Database
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AccountView>();
+            modelBuilder.Entity<AccountGroupView>();
         }
     }
 }

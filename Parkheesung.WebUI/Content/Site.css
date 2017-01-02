@@ -218,3 +218,4 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .fb_iframe_widget { width:100% !important; }
 .fb_iframe_widget span { width:100% !important; }
 .fb_iframe_widget span iframe { width:100% !important; }
+.ximg img { width:25px;height:25px;cursor:pointer;outline:none; }

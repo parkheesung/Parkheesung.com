@@ -1,0 +1,56 @@
+﻿@model List<AccountGroupView>
+@{
+    Layout = "~/Views/Shared/_SubPage.cshtml";
+
+    long GroupID = ViewBag.GroupID;
+}
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-6">
+                <ul id="gList" class="list-group">
+                    @foreach (var item in Model)
+                    {
+                        <li id="gList_@(item.GroupID)" class="list-group-item">
+                            <a href="javascript:GroupEdit('@(item.GroupID)','@(item.GroupName)')">@(item.GroupName)</a>
+                            <span class="ximg"><img src="/Content/images/close.png" alt="" onclick="GroupErase('@(item.GroupID)')" /></span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well bs-component">
+                            <form class="form-horizontal">
+                                <input type="hidden" name="GroupID" id="GroupID" value="" />
+                                <fieldset>
+                                    <legend>그룹명</legend>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" id="GroupName" name="GroupName" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group right">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="GroupSave()">저장</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 right">
+                        <button type="button" class="btn btn-default btn-sm" onclick="GroupReset();">신규등록</button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="gotoURL('/Account/List?GroupID=@(GroupID)');">목록으로</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@model List<AccountGroupView>
+@{
+    Layout = "~/Views/Shared/_SubPage.cshtml";
+
+    long GroupID = ViewBag.GroupID;
+}
+<div class="row">
+<div class="col-md-3">
+    <ul class="list-group">
+        <li class="list-group-item active">계정관리</li>
+    </ul>
+    @Html.Partial("~/Views/Account/_LeftMenu.cshtml", Model)
+</div>
+<div class="col-md-9">
+    <div class="well bs-component">
+        <form name="frm" id="frm" method="post" class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label for="GroupID" class="col-md-2 control-label">Group</label>
+                    <div class="col-md-10">
+                        <select class="form-control" id="GroupID" name="GroupID">
+                            <option value="">미지정</option>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <option value="@(item.GroupID)" @item.GroupID.ValueCompare(GroupID, " Selected")>@(item.GroupName)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Title" class="col-md-2 control-label">Title</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="Title" name="Title" maxlength="100" placeholder="제목" value="" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="UserID" class="col-md-2 control-label">ID</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="UserID" name="UserID" maxlength="50" placeholder="아이디" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="UserPWD" class="col-md-2 control-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="UserPWD" name="UserPWD" maxlength="50" placeholder="비밀번호" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AccessURL" class="col-md-2 control-label">Access URL</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="AccessURL" name="AccessURL" maxlength="254" placeholder="접속 URL" value="" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Memo" class="col-md-2 control-label">Memo</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="3" id="Memo"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 text-center">
+                        <button type="button" class="btn btn-primary" onclick="AccountSave('/Account/List?GroupID=')">Save</button>
+                        <button type="button" class="btn btn-warning" onclick="gotoURL('/Account/List?GroupID=@(GroupID)')">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</div>

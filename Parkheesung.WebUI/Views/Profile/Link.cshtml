@@ -1,0 +1,26 @@
+﻿@model List<Link>
+@{
+    Layout = "~/Views/Shared/_SubPage.cshtml";
+}
+<div class="row">
+    @Html.Partial("~/Views/Profile/_LeftMenu.cshtml")
+    <div class="col-md-9">
+        <div class="row">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var link in Model)
+                {
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img class="img-rounded" src="@(link.LinkImage)" />
+                        <div class="caption text-center">
+                            <h3>@(link.Title)</h3>
+                            <p><a href="@(link.URL)" class="btn btn-warning" target="_blank" role="button">Link</a></p>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+    </div>
+</div>

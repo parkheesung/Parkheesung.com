@@ -11,3 +11,7 @@ function IsNullOrEmpty(str) {
 function gotoUrl(url) {
     location.href = url;
 };
+
+function gotoURL(url) {
+    location.href = url;
+};

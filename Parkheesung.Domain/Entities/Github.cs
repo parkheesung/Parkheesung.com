@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Parkheesung.Domain.Entities
 {
-    public class AccountGroup
+    public class Github
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public long GroupID { get; set; }
+        public long GithubID { get; set; }
 
         [Required]
         public long MemberID { get; set; }
@@ -18,10 +18,14 @@ namespace Parkheesung.Domain.Entities
         [Required]
         [Column(TypeName = SqlType.NVarChar)]
         [StringLength(150)]
-        public string GroupName { get; set; }
+        public string Title { get; set; }
 
-        [DefaultValue(true)]
-        public bool IsActive { get; set; }
+        [Column(TypeName = SqlType.VarChar)]
+        [StringLength(250)]
+        public string AccessURL { get; set; }
+
+        [Column(TypeName = SqlType.VarChar)]
+        public string Memo { get; set; }
 
         [Column(TypeName = SqlType.DateTime2)]
         public DateTime RegDate { get; set; }

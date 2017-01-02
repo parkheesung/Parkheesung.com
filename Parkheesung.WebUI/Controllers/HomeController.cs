@@ -1,4 +1,5 @@
-﻿using Parkheesung.Domain.Abstract;
+﻿using OctopusLibrary.Filters;
+using Parkheesung.Domain.Abstract;
 using Parkheesung.WebUI.Abstract;
 using System.Web.Mvc;
 
@@ -11,6 +12,8 @@ namespace Parkheesung.WebUI.Controllers
 
         }
 
+        [Compress]
+        [OutputCache(Duration = 300, VaryByParam = "none")]
         public ActionResult Index()
         {
             this.OnLoginMemberInfoFill();

@@ -162,6 +162,12 @@
     <Content Include="Content\css\bootflat.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\HTML\newPasswordMailForm.html" />
+    <Content Include="Content\images\close-button.png" />
+    <Content Include="Content\images\close.png" />
+    <Content Include="Content\images\close_white.png" />
+    <Content Include="Content\images\fav.png" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\Link\facebook.png" />
     <Content Include="Content\images\Link\GoogleBlog.png" />
     <Content Include="Content\images\Link\instagram.png" />
@@ -173,12 +179,22 @@
     <Content Include="Content\images\Link\Tumblr.png" />
     <Content Include="Content\images\Link\Twitter.png" />
     <Content Include="Content\images\Link\wBlog.png" />
+    <Content Include="Content\images\loading_flower.gif" />
+    <Content Include="Content\images\main\blogger.jpg" />
+    <Content Include="Content\images\main\bo.png" />
+    <Content Include="Content\images\main\cisco.png" />
+    <Content Include="Content\images\main\ford_puzzle.PNG" />
+    <Content Include="Content\images\main\Lotte_Sweethome.PNG" />
+    <Content Include="Content\images\main\Lotte_Xylitol.PNG" />
+    <Content Include="Content\images\main\orion.png" />
+    <Content Include="Content\images\main\Samsung_Support.PNG" />
+    <Content Include="Content\images\thumbnail.png" />
+    <Content Include="Content\img\Main4.png" />
     <Content Include="Content\img\Main_01.png" />
     <Content Include="Content\img\check_flat\default.png" />
     <Content Include="Content\img\close-button.png" />
     <Content Include="Content\img\close_btn.png" />
     <Content Include="Content\img\loading_flower.gif" />
-    <Content Include="Content\img\main_02.png" />
     <Content Include="Content\img\Main_03.png" />
     <Content Include="Content\js\icheck.min.js" />
     <Content Include="Content\js\jquery.fs.selecter.min.js" />
@@ -193,6 +209,7 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\default.js" />
+    <None Include="Properties\PublishProfiles\parkheesung.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -275,11 +292,18 @@
     <Content Include="Views\Shared\_SubPage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\SNS.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\NewPasswordToEmail.cshtml" />
     <Content Include="Views\Member\Setup.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\List.cshtml" />
+    <Content Include="Views\Account\Regist.cshtml" />
+    <Content Include="Views\Account\ManagedGroup.cshtml" />
+    <Content Include="Views\Account\_LeftMenu.cshtml" />
+    <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\Profile\Link.cshtml" />
+    <Content Include="Views\Profile\_LeftMenu.cshtml" />
+    <Content Include="Views\Profile\Career.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

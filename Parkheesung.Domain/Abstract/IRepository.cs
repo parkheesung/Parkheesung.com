@@ -28,5 +28,16 @@ namespace Parkheesung.Domain.Abstract
         Member FindEmailWithFacebookID(string Email, string FacebookID);
         ReturnData UpdateMemberInfo(SetupMember setup, long MemberID);
         Member GetMemberFromExternalToken(string Token);
+
+        List<AccountView> GetAccountList(long MemberID, string Keyword = "", long GroupID = -1);
+        Task<List<AccountView>> GetAccountListAsync(long MemberID, string Keyword = "", long GroupID = -1);
+        List<AccountGroupView> GetAccountGroupList(long MemberID);
+        Task<List<AccountGroupView>> GetAccountGroupListAsync(long MemberID);
+        ReturnData AccountGroupSave(long MemberID, string GroupName, long GroupID = -1);
+        ReturnData AccountGroupRemove(long MemberID, long GroupID);
+        ReturnData AccountSave(long MemberID, Account account);
+        Account GetAccount(long MemberID, long AccountID);
+        Task<Account> GetAccountAsync(long MemberID, long AccountID);
+        ReturnData AccountRemove(long MemberID, long AccountID);
     }
 }

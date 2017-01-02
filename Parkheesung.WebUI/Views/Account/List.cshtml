@@ -1,0 +1,66 @@
+﻿@model List<AccountView>
+@{
+    Layout = "~/Views/Shared/_SubPage.cshtml";
+
+    string Keyword = ViewBag.Keyword;
+    long GroupID = ViewBag.GroupID;
+
+    List<AccountGroupView> groupList = ViewBag.groupList as List<AccountGroupView>;
+}
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item active">계정관리</li>
+        </ul>
+        @Html.Partial("~/Views/Account/_LeftMenu.cshtml", groupList)
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-6 mDown10">
+                <button type="button" onclick="gotoURL('/Account/ManagedGroup?GroupID=@(GroupID)');" class="btn btn-default btn-info">그룹관리</button>
+                <button type="button" onclick="gotoURL('/Account/Regist?GroupID=@(GroupID)');" class="btn btn-default btn-primary">계정등록</button>
+            </div>
+            <div class="col-md-6 mDown10">
+                <form name="SearchFrm" id="SearchFrm" method="get" action="@(Request.ServerVariables["Path_Info"])">
+                    <div class="input-group form-search">
+                        <input type="hidden" name="GroupID" id="GroupID" value="@(GroupID)" />
+                        <input type="text" name="Keyword" id="Keyword" maxlength="30" class="form-control search-query" value="@(Keyword)" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary" data-type="last">Search</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-striped table-bordered table-hover wide">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        int num = Model.Count;
+                        foreach (var account in Model)
+                        {
+                            <tr class="hand" onclick="gotoURL('/Account/View?AccountID=@(account.AccountID)&Keyword=@(Keyword)&GroupID=@(GroupID)');">
+                                <td class="smallFont">@(num--)</td>
+                                <td class="smallFont">@(account.Title)</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="2" class="none">No Data</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

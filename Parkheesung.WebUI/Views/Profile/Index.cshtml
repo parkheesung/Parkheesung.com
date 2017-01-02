@@ -1,21 +1,40 @@
 ﻿@{
     Layout = "~/Views/Shared/_SubPage.cshtml";
 }
-
-<h2>Profile</h2>
-
-<div>
-    Hello, My name is Park Hee-Sung.
-
-    I was very interested in computer when I was young.
-    That's why my major is Computer-Related in high school and university.
-
-    I found a job as a web-programmer.
-    Afterwards, I taked some classes of developers for six months.
-    Also, I taked some courses of dotnet-framework for two weeks.
-
-    I working mainly on ASP.NET development, and I hope that I will do coding when I get old.
-
-    I like surfing the internet, playing online games.
-    I have two children who live in Suwon City.
+<div class="row">
+    @Html.Partial("~/Views/Profile/_LeftMenu.cshtml")
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>웹프로그래머로 출발</h3>
+                <p>
+                    원래 웹디자이너로 일을 시작했으나, 신입시절 내가 디자인보다는 개발에 더 관심이 있다는 걸 알고, 퇴근 후 학원을 다니면서 공부를 시작했다.<br />
+                    이후 .net Framework 3.5 때 ASP.NET 2.0부터 닷넷을 접했으며 그때부터 C#을 다루기 시작했다.<br />
+                    이전까지는 ASP 위주로 개발을 했기때문에 C#이 다소 생소하고 어려웠지만, C,C++, 객체지향과 자료구조 등의 책들을 보며 노력했다.<br />
+                    오기로 C# 바이블을 정독하는 무식한 방법을 써가면서(그다지 남는 건 없었다.) 공부해 현재는 주력언어가 됐다.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h3>프로그래머가 되자</h3>
+                <p>
+                    ASP시절에도 웹이라는 한계점을 넘어서고 싶다는 욕심때문에, Visual Basic을 이용한 ActiveX를 개발하곤 했었다.<br />
+                    안타깝게도 실무에 적용해본건 아주 간단한 수준에 그치긴 했지만, 끊임없이 웹 그 이상의 것을 하고자 했다.<br />
+                    요즘에 이르러서는 사실 웹이니 응용이니 하는 구분이 모호해지긴 했다.  그만큼 웹이 발전했고, 이제는 같은 방법론으로 웹과 응용을 개발하기에 이르렀다.<br />
+                    현재 C#으로 윈도우서비스를 개발해 소스코드나 DB 백업을 원격지로 전송하거나, 외부 사이트 정보 수집(봇)같은 걸 만들어서 실무에 적용하고 있으며,<br />
+                    개발에 필요한 기능들을 취합하여 응용프로그램을 만들어서 팀원들과 같이 사용하기도 한다.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h3>C#을 넘어</h3>
+                <p>
+                    사실 C#만 파도 그 깊이가 너무 깊어 공부할게 산더미지만, 일반적인 실무에서 어느정도 수준에 이르면 사실 그 이상을 필요로 하는 프로젝트를 만나기가 쉽지 않다.<br />
+                    반면 일을 하다보면 다른 언어를 이해해야 하는 경우가 드문드문 생기고, 최근 개발추이가 여러가지 상황에서 그 상황에 유리한 언어를 쓰는 폴리글랏이 대두되고 있다.<br />
+                    Java같은 경우 C#과 문법이 같다.  약간 올드한 느낌은 있지만, 적응하는데 큰 어려움이 없다.<br />
+                    이미 안드로이드로 안드로이드 마켓에 앱을 등록한 경험이 있고, 크로스플랫폼(ActionScript)를 이용해 마켓에 등록한 경험도 있다.<br />
+                    그외에도 파이썬이나 Objective-C같은건 입문 정도는 경험해 보았으나, 그다지 내 취향의 언어는 아닌 것 같다.<br />
+                    역으로 요즘 관심이 있는 건 C 다.  C#을 이해하는데도 도움이 되고 전반적인 프로그래밍의 이해를 더해줄 것 같아서 관심을 가지고 있다.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

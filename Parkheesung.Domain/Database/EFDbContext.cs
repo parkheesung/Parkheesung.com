@@ -10,6 +10,8 @@ namespace Parkheesung.Domain.Database
         public DbSet<TokenAuth> TokenAuths { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountGroup> AccountGroups { get; set; }
+        public DbSet<Link> Links { get; set; }
+        public DbSet<Github> Githubs { get; set; }
 
 
         public EFDbContext() : base("name=EFDbContext")

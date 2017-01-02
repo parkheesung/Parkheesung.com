@@ -6,27 +6,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Parkheesung.Domain.Entities
 {
-    public class AccountGroup
+    [Table("AccountGroupView")]
+    public class AccountGroupView
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public long GroupID { get; set; }
 
         [Required]
         public long MemberID { get; set; }
 
-        [Required]
+        public int GroupCount { get; set; }
+
         [Column(TypeName = SqlType.NVarChar)]
         [StringLength(150)]
         public string GroupName { get; set; }
-
-        [DefaultValue(true)]
-        public bool IsActive { get; set; }
-
-        [Column(TypeName = SqlType.DateTime2)]
-        public DateTime RegDate { get; set; }
-
-        [Column(TypeName = SqlType.DateTime2)]
-        public DateTime LastUpdate { get; set; }
     }
 }

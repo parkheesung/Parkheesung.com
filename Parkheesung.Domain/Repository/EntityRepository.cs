@@ -545,7 +545,268 @@ namespace Parkheesung.Domain.Repository
 
         #region [계정관리]
 
+        public List<AccountView> GetAccountList(long MemberID, string Keyword = "", long GroupID = -1)
+        {
+            List<AccountView> result = new List<AccountView>();
 
+            using (var context = new EFDbReadOnlyContext())
+            {
+                if (String.IsNullOrEmpty(Keyword))
+                {
+                    if (GroupID > 0)
+                    {
+                        result = context.AccountView.Where(x => x.MemberID == MemberID)
+                                                                .Where(x => x.IsActive)
+                                                                .Where(x => x.GroupID == GroupID)
+                                                                .OrderByDescending(x => x.AccountID)
+                                                                .ToList();
+                    }                                      
+                    else
+                    {
+                        result = context.AccountView.Where(x => x.MemberID == MemberID)
+                                                                .Where(x => x.IsActive)
+                                                                .OrderByDescending(x => x.AccountID)
+                                                                .ToList();
+                    }
+                }
+                else
+                {
+                    if (GroupID > 0)
+                    {
+                        result = context.AccountView.Where(x => x.MemberID == MemberID)
+                                                                .Where(x => x.IsActive)
+                                                                .Where(x => x.GroupID == GroupID)
+                                                                .Where(x => x.Title.Contains(Keyword) || x.AccessURL.Contains(Keyword) || x.Memo.Contains(Keyword))
+                                                                .OrderByDescending(x => x.AccountID)
+                                                                .ToList();
+                    }
+                    else
+                    {
+                        result = context.AccountView.Where(x => x.MemberID == MemberID)
+                                                                .Where(x => x.IsActive)
+                                                                .Where(x => x.Title.Contains(Keyword) || x.AccessURL.Contains(Keyword) || x.Memo.Contains(Keyword))
+                                                                .OrderByDescending(x => x.AccountID)
+                                                                .ToList();
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public Task<List<AccountView>> GetAccountListAsync(long MemberID, string Keyword = "", long GroupID = -1)
+        {
+            return Task.Factory.StartNew(() => GetAccountList(MemberID, Keyword, GroupID));
+        }
+
+        public List<AccountGroupView> GetAccountGroupList(long MemberID)
+        {
+            List<AccountGroupView> result = new List<AccountGroupView>();
+
+            result.Add(new AccountGroupView()
+            {
+                MemberID = MemberID,
+                GroupID = -1,
+                GroupCount = 0,
+                GroupName = "전체보기"
+            });
+
+            using (var context = new EFDbReadOnlyContext())
+            {
+                var tmp = context.AccountGroupView.Where(x => x.MemberID == MemberID)
+                                                                    .OrderBy(x => x.GroupName)
+                                                                    .ToList();
+
+                result.AddRange(tmp);
+                result[0].GroupCount = tmp.Sum(x => x.GroupCount);
+            }
+
+            return result;
+        }
+
+        public Task<List<AccountGroupView>> GetAccountGroupListAsync(long MemberID)
+        {
+            return Task.Factory.StartNew(() => GetAccountGroupList(MemberID));
+        }
+
+        public Account GetAccount(long MemberID, long AccountID)
+        {
+            Account result = new Account();
+
+            using (var context = new EFDbContext())
+            {
+                result = context.Accounts.Where(x => x.AccountID == AccountID)
+                                                   .Where(x => x.MemberID == MemberID)
+                                                   .Take(1)
+                                                   .FirstOrDefault();
+            }
+
+            return result;
+        }
+
+        public Task<Account> GetAccountAsync(long MemberID, long AccountID)
+        {
+            return Task.Factory.StartNew(() => GetAccount(MemberID, AccountID));
+        }
+
+        public ReturnData AccountGroupSave(long MemberID, string GroupName, long GroupID = -1)
+        {
+            ReturnData result = new ReturnData();
+            AccountGroup group = null;
+
+            using (var context = new EFDbContext())
+            {
+                if (GroupID > 0)
+                {
+                    group = context.AccountGroups.Where(x => x.GroupID == GroupID).FirstOrDefault();
+                    if (group != null || group.GroupID > 0)
+                    {
+                        if (group.MemberID == MemberID)
+                        {
+                            group.GroupName = GroupName;
+                            group.LastUpdate = DateTime.Now;
+                            context.SaveChanges();
+                            result.Success(group.GroupID);
+                        }
+                        else
+                        {
+                            result.Error("수정할 권한이 없습니다.");
+                        }
+                    }
+                    else
+                    {
+                        group = new AccountGroup()
+                        {
+                            GroupName = GroupName,
+                            IsActive = true,
+                            MemberID = MemberID,
+                            RegDate = DateTime.Now,
+                            LastUpdate = DateTime.Now
+                        };
+                        context.AccountGroups.Add(group);
+                        context.SaveChanges();
+                        result.Success(group.GroupID);
+                    }
+                }
+                else
+                {
+                    group = new AccountGroup()
+                    {
+                        GroupName = GroupName,
+                        IsActive = true,
+                        MemberID = MemberID,
+                        RegDate = DateTime.Now,
+                        LastUpdate = DateTime.Now
+                    };
+                    context.AccountGroups.Add(group);
+                    context.SaveChanges();
+                    result.Success(group.GroupID);
+                }
+            }
+
+            return result;
+        }
+
+        public ReturnData AccountGroupRemove(long MemberID, long GroupID)
+        {
+            ReturnData result = new ReturnData();
+            AccountGroup group = null;
+
+            using (var context = new EFDbContext())
+            {
+                group = context.AccountGroups.Where(x => x.GroupID == GroupID).FirstOrDefault();
+                if (group != null && group.GroupID > 0)
+                {
+                    if (group.MemberID == MemberID)
+                    {
+                        context.AccountGroups.Remove(group);
+                        context.SaveChanges();
+                        result.Success(1);
+                    }
+                    else
+                    {
+                        result.Error("삭제할 권한이 없습니다.");
+                    }
+                }
+                else
+                {
+                    result.Error("대상을 찾을 수 없습니다.");
+                }
+            }
+
+            return result;
+        }
+
+        public ReturnData AccountSave(long MemberID, Account account)
+        {
+            ReturnData result = new ReturnData();
+
+            using (var context = new EFDbContext())
+            {
+                if (account != null && account.AccountID > 0)
+                {
+                    Account tmp = context.Accounts.Where(x => x.AccountID == account.AccountID).FirstOrDefault();
+                    if (tmp != null && tmp.AccountID == account.AccountID && tmp.MemberID == MemberID)
+                    {
+                        tmp.AccessURL = account.AccessURL;
+                        tmp.Memo = account.Memo;
+                        tmp.Title = account.Title;
+                        tmp.UserID = account.UserID;
+                        tmp.UserPWD = account.UserPWD;
+                        tmp.GroupID = account.GroupID;
+                        tmp.LastUpdate = DateTime.Now;
+                        context.SaveChanges();
+                        result.Success(tmp.AccountID, "", String.Format("{0}", account.GroupID));
+                    }
+                    else
+                    {
+                        result.Error("수정 권한이 없습니다.");
+                    }                                         
+                }
+                else
+                {
+                    account.RegDate = DateTime.Now;
+                    account.LastUpdate = DateTime.Now;
+                    account.MemberID = MemberID;
+                    account.IsActive = true;
+                    context.Accounts.Add(account);
+                    context.SaveChanges();
+                    result.Success(account.AccountID, "", String.Format("{0}", account.GroupID));
+                }
+            }
+
+            return result;
+        }
+
+        public ReturnData AccountRemove(long MemberID, long AccountID)
+        {
+            ReturnData result = new ReturnData();
+
+            using (var context = new EFDbContext())
+            {
+                var account = context.Accounts.Where(x => x.AccountID == AccountID).FirstOrDefault();
+
+                if (account != null && account.AccountID > 0)
+                {
+                    if (account.MemberID == MemberID)
+                    {
+                        context.Accounts.Remove(account);
+                        context.SaveChanges();
+                        result.Success(1);
+                    }
+                    else
+                    {
+                        result.Error("삭제할 권한이 없습니다.");
+                    }
+                }
+                else
+                {
+                    result.Error("대상을 찾을 수 없습니다.");
+                }
+            }
+
+            return result;
+        }
 
         #endregion [계정관리]
     }

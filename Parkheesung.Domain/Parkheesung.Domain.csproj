@@ -90,7 +90,10 @@
     <Compile Include="Database\EFDbReadOnlyContext.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\AccountGroup.cs" />
+    <Compile Include="Entities\AccountGroupView.cs" />
     <Compile Include="Entities\AccountView.cs" />
+    <Compile Include="Entities\Github.cs" />
+    <Compile Include="Entities\Link.cs" />
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\MemberLoginLog.cs" />
     <Compile Include="Entities\TokenAuth.cs" />

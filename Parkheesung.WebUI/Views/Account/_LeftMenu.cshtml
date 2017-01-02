@@ -1,0 +1,14 @@
+﻿@model List<AccountGroupView>
+@{ 
+    long GroupID = ViewBag.GroupID;
+}
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li onclick="gotoURL('/Account/List?GroupID=@(item.GroupID)');" class="list-group-item hand @(GroupID.ValueCompare(item.GroupID, "active"))">
+            @(item.GroupName)
+            <span class="badge">@(item.GroupCount)</span>
+        </li>
+    }
+</ul>
+
