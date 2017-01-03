@@ -223,6 +223,7 @@
     <Content Include="Content\images\main\orion.png" />
     <Content Include="Content\images\main\Samsung_Support.PNG" />
     <Content Include="Content\images\thumbnail.png" />
+    <Content Include="Content\img\FacebookShare.png" />
     <Content Include="Content\img\Main4.png" />
     <Content Include="Content\img\Main_01.png" />
     <Content Include="Content\img\check_flat\default.png" />

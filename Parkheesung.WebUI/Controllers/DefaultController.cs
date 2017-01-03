@@ -34,7 +34,7 @@ namespace Parkheesung.WebUI.Controllers
             ViewBag.description = "웹개발자 박희성의 홈페이지입니다.";
             ViewBag.Attr = "style=\"background-color:#f1f2f6;\"";
             ViewBag.URL = Request.Url.Host;
-            ViewBag.Image = string.Format("{0}://{1}/FacebookShare.png", Request.Url.Scheme, Request.Url.Host);
+            ViewBag.Image = string.Format("{0}://{1}/Content/img/FacebookShare.png", Request.Url.Scheme, Request.Url.Host);
         }
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)

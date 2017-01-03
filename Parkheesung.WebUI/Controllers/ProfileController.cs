@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Parkheesung.WebUI.Controllers
 {
-    public class ProfileController : SubController
+    public class ProfileController : DefaultController
     {
         public ProfileController(IRepository rep, ISiteUtility site) : base(rep, site)
         {
