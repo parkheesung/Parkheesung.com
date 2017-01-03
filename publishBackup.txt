@@ -20,6 +20,7 @@
     <add key="IsReal" value="true" />
     <add key="GMailID" value="yunlang97@gmail.com" />
     <add key="GMailPWD" value="krxfiitwmjkeaxeq" />
+    <add key="SecretKey" value="615CDECA6AFB42EF" />
   </appSettings>
   <system.web>
     <compilation targetFramework="4.5.2" />

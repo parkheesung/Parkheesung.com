@@ -85,8 +85,8 @@ namespace Parkheesung.WebUI.Controllers
             ViewBag.GroupID = GroupID;
             ViewBag.groupList = groupList;
 
-            accountInfo.UserID = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserID, PrivateMyInfo.Secret, false);
-            accountInfo.UserPWD = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserPWD, PrivateMyInfo.Secret, false);
+            accountInfo.UserID = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserID, this.SecretKey, false);
+            accountInfo.UserPWD = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserPWD, this.SecretKey, false);
 
             return View(accountInfo);
         }

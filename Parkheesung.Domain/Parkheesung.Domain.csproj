@@ -101,7 +101,6 @@
     <Compile Include="Models\FacebookMember.cs" />
     <Compile Include="Models\JoinMember.cs" />
     <Compile Include="Models\SetupMember.cs" />
-    <Compile Include="PrivateMyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\EntityRepository.cs" />
   </ItemGroup>

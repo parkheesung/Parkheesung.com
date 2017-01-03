@@ -5,6 +5,7 @@ using Parkheesung.Domain.Entities;
 using Parkheesung.WebUI.Abstract;
 using Parkheesung.WebUI.Controllers;
 using System;
+using System.Configuration;
 using System.Text;
 using System.Web;
 
@@ -12,6 +13,12 @@ namespace Parkheesung.WebUI.Models
 {
     public class SiteUtility : ISiteUtility
     {
+        private string Secret { get; set; }
+        public SiteUtility()
+        {
+            this.Secret = ConfigurationManager.AppSettings["SecretKey"];
+        }
+
         public string GetUserIP()
         {
             return HttpContext.Current.Request.UserHostAddress;
@@ -19,12 +26,12 @@ namespace Parkheesung.WebUI.Models
 
         public string CryptoToken(string originalString)
         {
-            return OctopusLibrary.Crypto.AES256.Encrypt(originalString, PrivateMyInfo.Secret, true);
+            return OctopusLibrary.Crypto.AES256.Encrypt(originalString, this.Secret, true);
         }
 
         public string DecryptToken(string cryptoString)
         {
-            return OctopusLibrary.Crypto.AES256.Decrypt(cryptoString, PrivateMyInfo.Secret, true);
+            return OctopusLibrary.Crypto.AES256.Decrypt(cryptoString, this.Secret, true);
         }
 
         public void LoginCookieSave(string CookieValue)
@@ -47,7 +54,7 @@ namespace Parkheesung.WebUI.Models
             HttpCookie myCookie = HttpContext.Current.Request.Cookies.Get(NameString.LoginCookie);
             if (myCookie != null && !String.IsNullOrEmpty(myCookie.Value))
             {
-                result = OctopusLibrary.Crypto.AES256.Decrypt(myCookie.Value, PrivateMyInfo.Secret, true);
+                result = OctopusLibrary.Crypto.AES256.Decrypt(myCookie.Value, this.Secret, true);
             }
             return result;
         }

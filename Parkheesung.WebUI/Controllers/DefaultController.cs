@@ -14,6 +14,7 @@ namespace Parkheesung.WebUI.Controllers
         protected ISiteUtility site { get; set; }
         public Member member { get; set; }
         public string token { get; set; }
+        public string SecretKey { get; set; }
 
         public DefaultController(IRepository _rep, ISiteUtility _site)
         {
@@ -25,6 +26,7 @@ namespace Parkheesung.WebUI.Controllers
         {
             base.OnActionExecuting(filterContext);
             this.IsReal = this.GetSetting("IsReal").Equals("true");
+            this.SecretKey = this.GetSetting("SecretKey");
 
             ViewBag.domain = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Host);
             ViewBag.Title = "Parkheesung.com";
