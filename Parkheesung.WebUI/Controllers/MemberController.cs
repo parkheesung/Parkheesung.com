@@ -99,8 +99,12 @@ namespace Parkheesung.WebUI.Controllers
 
             if (result.Check)
             {
-                this.rep.MemberLoginLogRegist(result.Code, this.site.GetUserIP());
-                this.site.LoginCookieSave(result.Value);
+                result = this.rep.CreateTokenAuth(result.Code);
+                if (result.Check)
+                {
+                    this.rep.MemberLoginLogRegist(result.Code, this.site.GetUserIP());
+                    this.site.LoginCookieSave(result.Value);
+                }
             }
 
             return Json(result);

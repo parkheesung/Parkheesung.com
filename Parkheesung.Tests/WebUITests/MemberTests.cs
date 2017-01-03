@@ -65,10 +65,21 @@ namespace Parkheesung.Tests.WebUITests
             string UserPWD = "Test1234";
             string UserIP = "127.0.0.1";
 
+            Member member = new Member
+            {
+                MemberID = 1,
+                Email = "Test3@test.com",
+                Name = "홍길동",
+                Password = OctopusLibrary.Crypto.Sha512.CreateHash("testpass"),
+                RegDate = DateTime.Now,
+                IsEnabled = true,
+                UserToken = Guid.NewGuid().ToString()
+            };
+
             ReturnData rtn1 = new ReturnData
             {
                 Check = true,
-                Code = 1,
+                Code = member.MemberID,
                 Message = "",
                 Value = Guid.NewGuid().ToString()
             };
@@ -84,6 +95,7 @@ namespace Parkheesung.Tests.WebUITests
             Mock<IRepository> rep = new Mock<IRepository>();
             rep.Setup(m => m.MemberLogin(UserMail, UserPWD)).Returns(rtn1);
             rep.Setup(m => m.MemberLoginLogRegist(rtn1.Code, UserIP)).Returns(rtn2);
+            rep.Setup(m => m.CreateTokenAuth(member.MemberID)).Returns(rtn1);
 
             Mock<ISiteUtility> site = new Mock<ISiteUtility>();
             site.Setup(m => m.LoginCookieSave(rtn1.Value));

@@ -12,7 +12,7 @@ namespace Parkheesung.WebUI.Controllers
 
         }
 
-        [Compress]
+        
         [OutputCache(Duration = 300, VaryByParam = "none")]
         public ActionResult Index()
         {

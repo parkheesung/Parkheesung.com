@@ -104,6 +104,10 @@ namespace Parkheesung.Domain.Repository
                         {
                             result.Success(member.MemberID, "", member.UserToken);
                         }
+                        else if (member.IsFacebook && member.FacebookID.Equals(Password))
+                        {
+                            result.Success(member.MemberID, "", member.UserToken);
+                        }
                         else
                         {
                             result.Error("비밀번호가 일치하지 않습니다.");
@@ -180,6 +184,49 @@ namespace Parkheesung.Domain.Repository
                     {
                         result.Error("해당 이메일로 가입된 내역이 없습니다.");
                     }
+                }
+            }
+
+            return result;
+        }
+
+        public ReturnData CreateTokenAuth(long MemberID)
+        {
+            ReturnData result = new ReturnData();
+
+            using (var context = new EFDbContext())
+            {
+                Member member = context.Members.Where(x => x.IsEnabled == true)
+                                               .Where(x => x.MemberID == MemberID)
+                                               .FirstOrDefault();
+
+                if (member != null && member.MemberID > 0)
+                {
+                    TokenAuth auth = new TokenAuth()
+                    {
+                        IsEnabled = true,
+                        MemberID = member.MemberID,
+                        ExpiredDate = DateTime.Now.AddMonths(1),
+                        RegDate = DateTime.Now,
+                        UserToken = Guid.NewGuid().ToString(),
+                        FacebookToken = ""
+                    };
+
+                    context.TokenAuths.Add(auth);
+                    context.SaveChanges();
+
+                    if (auth.TokenAuthID > 0)
+                    {
+                        result.Success(member.MemberID, "", auth.UserToken);
+                    }
+                    else
+                    {
+                        result.Error("권한 발급이 실패하였습니다.");
+                    }
+                }
+                else
+                {
+                    result.Error("해당 이메일로 가입된 내역이 없습니다.");
                 }
             }
 
@@ -291,6 +338,21 @@ namespace Parkheesung.Domain.Repository
                 member = context.Members.Where(x => x.IsEnabled == true)
                                         .Where(x => x.UserToken == token)
                                         .FirstOrDefault();
+
+                if (member == null || member.MemberID < 1)
+                {
+                    var auth = context.TokenAuths.Where(x => x.UserToken.Equals(token))
+                                                              .Where(x => x.IsEnabled)
+                                                              .Where(x => x.ExpiredDate >= DateTime.Now)
+                                                              .FirstOrDefault();
+
+                    if (auth != null && auth.TokenAuthID > 0)
+                    {
+                        member = context.Members.Where(x => x.IsEnabled == true)
+                                                .Where(x => x.MemberID == auth.MemberID)
+                                                .FirstOrDefault();
+                    }
+                }
             }
 
             return member;

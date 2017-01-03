@@ -39,5 +39,6 @@ namespace Parkheesung.Domain.Abstract
         Account GetAccount(long MemberID, long AccountID);
         Task<Account> GetAccountAsync(long MemberID, long AccountID);
         ReturnData AccountRemove(long MemberID, long AccountID);
+        ReturnData CreateTokenAuth(long MemberID);
     }
 }
