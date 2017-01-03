@@ -20,6 +20,9 @@ namespace Parkheesung.WebUI.Controllers
         public ActionResult Index()
         {
             ViewBag.SubPage = "profile";
+
+            this.OnLoginMemberInfoFill();
+
             return View();
         }
 
@@ -28,6 +31,8 @@ namespace Parkheesung.WebUI.Controllers
         public async Task<ActionResult> Career()
         {
             ViewBag.SubPage = "career";
+
+            this.OnLoginMemberInfoFill();
 
             List<Github> list = await this.rep.GetGitHubsAsync(1);
 
@@ -39,6 +44,8 @@ namespace Parkheesung.WebUI.Controllers
         public async Task<ActionResult> Link()
         {
             ViewBag.SubPage = "link";
+
+            this.OnLoginMemberInfoFill();
 
             List<Link> list = await this.rep.GetLinksAsync(1);
 
