@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Parkheesung.WebUI/Web.Release.config
+/Parkheesung.WebUI/Web.Debug.config
+/Parkheesung.WebUI/Web.config

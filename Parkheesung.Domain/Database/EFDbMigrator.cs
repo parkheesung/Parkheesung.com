@@ -52,7 +52,7 @@ namespace Parkheesung.Domain.Database
                 builder.Clear();
                 builder.AppendLine("CREATE VIEW [dbo].[AccountView]");
                 builder.AppendLine("AS");
-                builder.AppendLine("SELECT  A.AccountID, A.MemberID, A.Title, A.UserID, A.UserPWD, A.AccessURL, A.Memo, A.IsActive, A.RegDate, ");
+                builder.AppendLine("SELECT  A.AccountID, A.MemberID, A.Title, A.UserID, A.UserPWD, A.AccessURL, A.Memo, A.RegDate, ");
                 builder.AppendLine("A.LastUpdate, B.GroupID, B.GroupName");
                 builder.AppendLine("FROM     dbo.Accounts AS A INNER JOIN");
                 builder.AppendLine("dbo.AccountGroupView AS B ON A.GroupID = B.GroupID");

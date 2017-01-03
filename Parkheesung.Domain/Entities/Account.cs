@@ -40,9 +40,6 @@ namespace Parkheesung.Domain.Entities
         [Column(TypeName = SqlType.NVarChar)]
         public string Memo { get; set; }
 
-        [DefaultValue(true)]
-        public bool IsActive { get; set; }
-
         [Column(TypeName = SqlType.DateTime2)]
         public DateTime RegDate { get; set; }
 

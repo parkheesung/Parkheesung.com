@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Github>
+@{
     Layout = "~/Views/Shared/_SubPage.cshtml";
 }
 <div class="rows">
@@ -24,7 +25,7 @@
             </div>
             <div class="jumbotron-contents">
                 <h2>Web Programmer</h2>
-                <p>I have liked programming from the first time. <br/>Now, enjoy the programming in spite of free time.</p>
+                <p>I have liked programming from the first time. <br />Now, enjoy the programming in spite of free time.</p>
             </div>
         </div>
     </div>
@@ -45,27 +46,21 @@
             <h4>Contact me!</h4>
             <p>I am using the most SNS Service.</p>
             <p>Contact me if needed.</p>
-            <p><a class="btn btn-success" href="#">Show SNS Channel list</a></p>
+            <p><a class="btn btn-success" href="/Profile/Link">Show SNS Channel list</a></p>
         </div>
     </div>
     <div class="col-md-4">
         <div class="list-group">
-            <a href="https://github.com/parkheesung/vnote" class="list-group-item" target="_blank">
-                <h4 class="list-group-item-heading">vNote for Web</h4>
-                <p class="list-group-item-text">github.com/parkheesung/vnote</p>
-            </a>
-            <a href="https://github.com/parkheesung/vNoteAndroidV2" class="list-group-item" target="_blank">
-                <h4 class="list-group-item-heading">vNote for Android</h4>
-                <p class="list-group-item-text">github.com/parkheesung/vNoteAndroidV2</p>
-            </a>
-            <a href="https://github.com/parkheesung/ReadingShare" class="list-group-item" target="_blank">
-                <h4 class="list-group-item-heading">ReadingShare</h4>
-                <p class="list-group-item-text">github.com/parkheesung/ReadingShare</p>
-            </a>
-            <a href="https://github.com/parkheesung/OctopusLibrary" class="list-group-item" target="_blank">
-                <h4 class="list-group-item-heading">ASP.NET Web Development Library</h4>
-                <p class="list-group-item-text">github.com/parkheesung/OctopusLibrary</p>
-            </a>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <a href="@(item.AccessURL)" class="list-group-item" target="_blank">
+                        <h4 class="list-group-item-heading">@(item.Title)</h4>
+                        <p class="list-group-item-text">@(item.Memo)</p>
+                    </a>
+                }
+            }
         </div>
     </div>
 </div>

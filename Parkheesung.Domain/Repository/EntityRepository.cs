@@ -618,7 +618,6 @@ namespace Parkheesung.Domain.Repository
                     if (GroupID > 0)
                     {
                         result = context.AccountView.Where(x => x.MemberID == MemberID)
-                                                                .Where(x => x.IsActive)
                                                                 .Where(x => x.GroupID == GroupID)
                                                                 .OrderByDescending(x => x.AccountID)
                                                                 .ToList();
@@ -626,7 +625,6 @@ namespace Parkheesung.Domain.Repository
                     else
                     {
                         result = context.AccountView.Where(x => x.MemberID == MemberID)
-                                                                .Where(x => x.IsActive)
                                                                 .OrderByDescending(x => x.AccountID)
                                                                 .ToList();
                     }
@@ -636,7 +634,6 @@ namespace Parkheesung.Domain.Repository
                     if (GroupID > 0)
                     {
                         result = context.AccountView.Where(x => x.MemberID == MemberID)
-                                                                .Where(x => x.IsActive)
                                                                 .Where(x => x.GroupID == GroupID)
                                                                 .Where(x => x.Title.Contains(Keyword) || x.AccessURL.Contains(Keyword) || x.Memo.Contains(Keyword))
                                                                 .OrderByDescending(x => x.AccountID)
@@ -645,7 +642,6 @@ namespace Parkheesung.Domain.Repository
                     else
                     {
                         result = context.AccountView.Where(x => x.MemberID == MemberID)
-                                                                .Where(x => x.IsActive)
                                                                 .Where(x => x.Title.Contains(Keyword) || x.AccessURL.Contains(Keyword) || x.Memo.Contains(Keyword))
                                                                 .OrderByDescending(x => x.AccountID)
                                                                 .ToList();
@@ -740,7 +736,6 @@ namespace Parkheesung.Domain.Repository
                         group = new AccountGroup()
                         {
                             GroupName = GroupName,
-                            IsActive = true,
                             MemberID = MemberID,
                             RegDate = DateTime.Now,
                             LastUpdate = DateTime.Now
@@ -755,7 +750,6 @@ namespace Parkheesung.Domain.Repository
                     group = new AccountGroup()
                     {
                         GroupName = GroupName,
-                        IsActive = true,
                         MemberID = MemberID,
                         RegDate = DateTime.Now,
                         LastUpdate = DateTime.Now
@@ -830,7 +824,6 @@ namespace Parkheesung.Domain.Repository
                     account.RegDate = DateTime.Now;
                     account.LastUpdate = DateTime.Now;
                     account.MemberID = MemberID;
-                    account.IsActive = true;
                     context.Accounts.Add(account);
                     context.SaveChanges();
                     result.Success(account.AccountID, "", String.Format("{0}", account.GroupID));
@@ -871,5 +864,83 @@ namespace Parkheesung.Domain.Repository
         }
 
         #endregion [계정관리]
+
+        public List<Github> GetGitHubs(long MemberID)
+        {
+            List<Github> result = new List<Github>();
+
+            using (var context = new EFDbContext())
+            {
+                result = context.Githubs.Where(x => x.MemberID == MemberID)
+                                                 .OrderByDescending(x => x.GithubID)
+                                                 .ToList();
+            }
+
+            return result;
+        }
+
+        public Task<List<Github>> GetGitHubsAsync(long MemberID)
+        {
+            return Task.Factory.StartNew(() => GetGitHubs(MemberID));
+        }
+
+        public List<Github> GetGitHubs(long MemberID, int TopCount)
+        {
+            List<Github> result = new List<Github>();
+
+            using (var context = new EFDbContext())
+            {
+                result = context.Githubs.Where(x => x.MemberID == MemberID)
+                                                 .OrderByDescending(x => x.GithubID)
+                                                 .Take(TopCount)
+                                                 .ToList();
+            }
+
+            return result;
+        }
+
+        public Task<List<Github>> GetGitHubsAsync(long MemberID, int TopCount)
+        {
+            return Task.Factory.StartNew(() => GetGitHubs(MemberID, TopCount));
+        }
+
+        public List<Link> GetLinks(long MemberID)
+        {
+            List<Link> result = new List<Link>();
+
+            using (var context = new EFDbContext())
+            {
+                result = context.Links.Where(x => x.MemberID == MemberID)
+                                              .OrderByDescending(x => x.LinkID)
+                                              .ToList();
+            }
+
+            return result;
+        }
+
+        public Task<List<Link>> GetLinksAsync(long MemberID)
+        {
+            return Task.Factory.StartNew(() => GetLinks(MemberID));
+        }
+
+        public List<Link> GetLinks(long MemberID, int TopCount)
+        {
+            List<Link> result = new List<Link>();
+
+            using (var context = new EFDbContext())
+            {
+                result = context.Links.Where(x => x.MemberID == MemberID)
+                                              .OrderByDescending(x => x.LinkID)
+                                              .Take(TopCount)
+                                              .ToList();
+            }
+
+            return result;
+        }
+
+        public Task<List<Link>> GetLinksAsync(long MemberID, int TopCount)
+        {
+            return Task.Factory.StartNew(() => GetLinks(MemberID, TopCount));
+        }
     }
 }

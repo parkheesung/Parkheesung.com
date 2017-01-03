@@ -20,9 +20,6 @@ namespace Parkheesung.Domain.Entities
         [StringLength(150)]
         public string GroupName { get; set; }
 
-        [DefaultValue(true)]
-        public bool IsActive { get; set; }
-
         [Column(TypeName = SqlType.DateTime2)]
         public DateTime RegDate { get; set; }
 

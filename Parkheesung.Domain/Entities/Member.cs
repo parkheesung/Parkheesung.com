@@ -6,9 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Parkheesung.Domain.Entities
 {
-    /// <summary>
-    /// 회원정보
-    /// </summary>
     public class Member
     {
         [Key]

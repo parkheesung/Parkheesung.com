@@ -11,7 +11,7 @@ namespace Parkheesung.Domain.Entities
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public long AccountID { get; set; }
+        public long LinkID { get; set; }
 
         [Required]
         public long MemberID { get; set; }

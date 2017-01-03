@@ -40,5 +40,14 @@ namespace Parkheesung.Domain.Abstract
         Task<Account> GetAccountAsync(long MemberID, long AccountID);
         ReturnData AccountRemove(long MemberID, long AccountID);
         ReturnData CreateTokenAuth(long MemberID);
+
+        List<Github> GetGitHubs(long MemberID);
+        Task<List<Github>> GetGitHubsAsync(long MemberID);
+        List<Github> GetGitHubs(long MemberID, int TopCount);
+        Task<List<Github>> GetGitHubsAsync(long MemberID, int TopCount);
+        List<Link> GetLinks(long MemberID);
+        Task<List<Link>> GetLinksAsync(long MemberID);
+        List<Link> GetLinks(long MemberID, int TopCount);
+        Task<List<Link>> GetLinksAsync(long MemberID, int TopCount);
     }
 }

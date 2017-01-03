@@ -1,6 +1,9 @@
 ﻿using OctopusLibrary.Filters;
 using Parkheesung.Domain.Abstract;
+using Parkheesung.Domain.Entities;
 using Parkheesung.WebUI.Abstract;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Parkheesung.WebUI.Controllers
@@ -12,12 +15,13 @@ namespace Parkheesung.WebUI.Controllers
 
         }
 
-        
+        [Compress]
         [OutputCache(Duration = 300, VaryByParam = "none")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             this.OnLoginMemberInfoFill();
-            return View();
+            List<Github> list = await this.rep.GetGitHubsAsync(1, 5);
+            return View(list);
         }
     }
 }

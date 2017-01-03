@@ -1,6 +1,9 @@
 ﻿using OctopusLibrary.Filters;
 using Parkheesung.Domain.Abstract;
+using Parkheesung.Domain.Entities;
 using Parkheesung.WebUI.Abstract;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Parkheesung.WebUI.Controllers
@@ -22,18 +25,24 @@ namespace Parkheesung.WebUI.Controllers
 
         [Compress]
         [OutputCache(Duration = 300, VaryByParam = "none")]
-        public ActionResult Career()
+        public async Task<ActionResult> Career()
         {
             ViewBag.SubPage = "career";
-            return View();
+
+            List<Github> list = await this.rep.GetGitHubsAsync(1);
+
+            return View(list);
         }
 
         [Compress]
         [OutputCache(Duration = 300, VaryByParam = "none")]
-        public ActionResult Link()
+        public async Task<ActionResult> Link()
         {
             ViewBag.SubPage = "link";
-            return View();
+
+            List<Link> list = await this.rep.GetLinksAsync(1);
+
+            return View(list);
         }
     }
 }
