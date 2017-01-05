@@ -46,5 +46,17 @@ namespace Parkheesung.Domain.Entities
         [Column(TypeName = SqlType.DateTime2)]
         public DateTime LastUpdate { get; set; }
 
+        public void Decoding(string SecretKey)
+        {
+            this.UserID = OctopusLibrary.Crypto.AES256.Decrypt(this.UserID, SecretKey, false);
+            this.UserPWD = OctopusLibrary.Crypto.AES256.Decrypt(this.UserPWD, SecretKey, false);
+        }
+
+        public void Encoding(string SecretKey)
+        {
+            this.UserID = OctopusLibrary.Crypto.AES256.Encrypt(this.UserID, SecretKey, false);
+            this.UserPWD = OctopusLibrary.Crypto.AES256.Encrypt(this.UserPWD, SecretKey, false);
+        }
+
     }
 }

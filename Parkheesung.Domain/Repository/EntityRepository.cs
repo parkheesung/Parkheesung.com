@@ -664,9 +664,9 @@ namespace Parkheesung.Domain.Repository
             result.Add(new AccountGroupView()
             {
                 MemberID = MemberID,
-                GroupID = -1,
+                GroupID = 0,
                 GroupCount = 0,
-                GroupName = "전체보기"
+                GroupName = "전체보기" 
             });
 
             using (var context = new EFDbReadOnlyContext())

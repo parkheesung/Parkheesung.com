@@ -85,8 +85,7 @@ namespace Parkheesung.WebUI.Controllers
             ViewBag.GroupID = GroupID;
             ViewBag.groupList = groupList;
 
-            accountInfo.UserID = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserID, this.SecretKey, false);
-            accountInfo.UserPWD = OctopusLibrary.Crypto.AES256.Decrypt(accountInfo.UserPWD, this.SecretKey, false);
+            accountInfo.Decoding(this.SecretKey);
 
             return View(accountInfo);
         }
@@ -184,6 +183,7 @@ namespace Parkheesung.WebUI.Controllers
             ReturnData result = new ReturnData();
             if (this.member != null && this.member.MemberID > 0)
             {
+                account.Encoding(this.SecretKey);
                 result = this.rep.AccountSave(this.member.MemberID, account);
             }
             else
