@@ -29,9 +29,9 @@ namespace Parkheesung.WebUI.Controllers
             this.SecretKey = this.GetSetting("SecretKey");
 
             ViewBag.domain = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Host);
-            ViewBag.Title = "Parkheesung.com";
-            ViewBag.keywords = "박희성,Parkheesung,Parkheesung.com,프로그래머,개발자,웹개발자,ASP.NET,MVC,ASP.NET MVC,C#";
-            ViewBag.description = "웹개발자 박희성의 홈페이지입니다.";
+            ViewBag.Title = "Parkheesung";
+            ViewBag.keywords = "박희성,Parkheesung,Parkheesung.com,프로그래머,개발자,웹개발자";
+            ViewBag.description = "창작하는 개발자 박희성의 홈페이지입니다.";
             ViewBag.Attr = "style=\"background-color:#f1f2f6;\"";
             ViewBag.URL = Request.Url.Host;
             ViewBag.Image = string.Format("{0}://{1}/Content/img/FacebookShare.png", Request.Url.Scheme, Request.Url.Host);
