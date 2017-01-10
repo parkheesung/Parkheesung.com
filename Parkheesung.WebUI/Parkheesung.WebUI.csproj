@@ -249,6 +249,7 @@
     <None Include="Properties\PublishProfiles\Parkheesung - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Parkheesung - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\parkheesung.pubxml" />
+    <None Include="Properties\PublishProfiles\ParkheesungLocal.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -259,7 +260,7 @@
     <Content Include="scripts\site.min.js" />
     <Content Include="Views\XML\SiteMap.cshtml" />
     <Content Include="Views\Shared\_Xml.cshtml" />
-    <None Include="Web.config" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ISiteUtility.cs" />
